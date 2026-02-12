@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatchMyTalent Engine</title>
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <!-- Background -->
+    <div id="particles-bg"></div>
+
+    <!-- Main Container -->
+    <div class="main-box">
+
+        <!-- Title -->
+        <h1>🚀 MatchMyTalent Engine</h1>
+        <p class="subtitle">
+            Enter your skills and get the best matching job roles instantly!
+        </p>
+
+        <!-- Input Form -->
+        <form method="POST" class="skill-form">
+
+            <input type="text" name="skills"
+                   placeholder="e.g. Python, SQL, Machine Learning"
+                   required>
+
+            <button type="submit">
+                Get Recommendations
+            </button>
+
+        </form>
+
+        <!-- RESULTS SECTION -->
+        {% if recommendations %}
+
+        <div class="output-section">
+
+            <h2>✅ Top Recommendations</h2>
+
+            <div class="results">
+
+                {% for rec in recommendations %}
+
+                <!-- Job Card -->
+                <div class="card">
+
+                    <h3>📌 {{ rec.job }}</h3>
+
+                    <p>
+                        <b>Match Score:</b>
+                        <span class="score">{{ rec.score }}%</span>
+                    </p>
+
+                    <!-- Missing Skills as Badges -->
+                    <p><b>Missing Skills:</b></p>
+
+                    {% if rec.missing %}
+                        <div class="badge-container">
+                            {% for skill in rec.missing %}
+                                <span class="badge">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <span class="perfect">None 🎉</span>
+                    {% endif %}
+
+                    <!-- Description -->
+                    <p class="desc">
+                        {{ rec.desc }}
+                    </p>
+
+                    <!-- Courses Section -->
+                    {% if rec.courses %}
+                    <div class="course-box">
+                        <p><b>📚 Suggested Courses:</b></p>
+                        <ul>
+                            {% for course in rec.courses %}
+                                <li>✅ {{ course }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- Particles JS -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="{{ url_for('static', filename='particles.js') }}"></script>
+
+</body>
+</html>

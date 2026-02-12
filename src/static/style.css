@@ -1,0 +1,208 @@
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background */
+body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 60px 20px;
+  color: white;
+}
+
+/* Main Box */
+.main-box {
+  width: 100%;
+  max-width: 950px;
+  background: rgba(30, 41, 59, 0.95);
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 40px rgba(0, 255, 255, 0.25);
+  text-align: center;
+}
+
+/* Heading */
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: #facc15;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 35px;
+  color: #cbd5e1;
+}
+
+/* Form */
+.skill-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 50px;
+}
+
+.skill-form input {
+  width: 65%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.skill-form button {
+  padding: 16px 25px;
+  background: #facc15;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.skill-form button:hover {
+  background: #eab308;
+  transform: scale(1.05);
+}
+
+/* Output Section */
+.output-section {
+  text-align: left;
+}
+
+.output-section h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #38bdf8;
+}
+
+/* Results Cards */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Card */
+.card {
+  background: rgba(51, 65, 85, 0.95);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 0px 25px rgba(56, 189, 248, 0.4);
+}
+
+/* Job Title */
+.card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #f8fafc;
+}
+
+/* Score */
+.score {
+  font-weight: bold;
+  color: #22c55e;
+}
+
+/* Missing Skills */
+.missing {
+  color: #f87171;
+  font-weight: 600;
+}
+
+.perfect {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+/* Description */
+.desc {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skill-form {
+    flex-direction: column;
+  }
+
+  .skill-form input {
+    width: 100%;
+  }
+
+  .skill-form button {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+}
+#particles-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+/* Missing Skills Badges */
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.badge {
+    background: rgba(255, 70, 70, 0.15);
+    border: 1px solid rgba(255, 70, 70, 0.4);
+    color: #ff5a5a;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Courses Box */
+.course-box {
+    margin-top: 15px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid gold;
+    border-radius: 10px;
+}
+
+.course-box ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+.course-box li {
+    font-size: 14px;
+    margin-bottom: 6px;
+}
