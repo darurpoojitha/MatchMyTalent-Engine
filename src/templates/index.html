@@ -1,106 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MatchMyTalent Engine</title>
-
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
-
 <body>
-    <!-- Background -->
-    <div id="particles-bg"></div>
+<div id="particles-bg"></div>
+<div class="main-box">
 
-    <!-- Main Container -->
-    <div class="main-box">
+    <h1>🚀 MatchMyTalent Engine</h1>
+    <p class="subtitle">
+        AI-powered career recommendation & skill gap analysis system
+    </p>
 
-        <!-- Title -->
-        <h1>🚀 MatchMyTalent Engine</h1>
-        <p class="subtitle">
-            Enter your skills and get the best matching job roles instantly!
-        </p>
+    <!-- FORM -->
+    <form method="POST" class="skill-form">
+        <select name="mode">
+            <option value="skills" {% if mode=='skills' %}selected{% endif %}>Search by Skills</option>
+            <option value="job" {% if mode=='job' %}selected{% endif %}>Search by Job Title</option>
+        </select>
 
-        <!-- Input Form -->
-        <form method="POST" class="skill-form">
+        <input
+            type="text"
+            name="skills"
+            placeholder="Example: python, machine learning, deep learning"
+            required
+        />
+        <button type="submit">Analyze</button>
+    </form>
 
-            <input type="text" name="skills"
-                   placeholder="e.g. Python, SQL, Machine Learning"
-                   required>
-
-            <button type="submit">
-                Get Recommendations
-            </button>
-
-        </form>
-
-        <!-- RESULTS SECTION -->
-        {% if recommendations %}
-
+    <!-- RESULTS -->
+    {% if recommendations %}
         <div class="output-section">
-
-            <h2>✅ Top Recommendations</h2>
+            <h2>🎯 Career Matches</h2>
 
             <div class="results">
-
                 {% for rec in recommendations %}
+                    <div class="card">
 
-                <!-- Job Card -->
-                <div class="card">
+                        <h3>📌 {{ rec.job }}</h3>
 
-                    <h3>📌 {{ rec.job }}</h3>
+                        <!-- Score Section -->
+                        <div class="score-box">
+                            <span class="score-text">{{ rec.score }}%</span>
 
-                    <p>
-                        <b>Match Score:</b>
-                        <span class="score">{{ rec.score }}%</span>
-                    </p>
+                            <div class="progress-bar-container">
+                                <div
+                                    class="progress-bar-fill"
+                                    data-score="{{ rec.score }}"
+                                ></div>
+                            </div>
 
-                    <!-- Missing Skills as Badges -->
-                    <p><b>Missing Skills:</b></p>
+                            {% if rec.explanation %}
+                                <p class="explanation">{{ rec.explanation }}</p>
+                            {% endif %}
 
-                    {% if rec.missing %}
-                        <div class="badge-container">
-                            {% for skill in rec.missing %}
-                                <span class="badge">{{ skill }}</span>
-                            {% endfor %}
+                            {% if rec.confidence %}
+                                <p class="confidence">
+                                    Confidence: <b>{{ rec.confidence }}</b>
+                                </p>
+                            {% endif %}
                         </div>
-                    {% else %}
-                        <span class="perfect">None 🎉</span>
-                    {% endif %}
 
-                    <!-- Description -->
-                    <p class="desc">
-                        {{ rec.desc }}
-                    </p>
+                        <!-- Required Skills -->
+                        {% if rec.required %}
+                            <p class="section-title">🛠 Required Skills</p>
+                            <div class="badge-container">
+                                {% for skill in rec.required %}
+                                    <span class="badge">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
 
-                    <!-- Courses Section -->
-                    {% if rec.courses %}
-                    <div class="course-box">
-                        <p><b>📚 Suggested Courses:</b></p>
-                        <ul>
-                            {% for course in rec.courses %}
-                                <li>✅ {{ course }}</li>
-                            {% endfor %}
-                        </ul>
+                        <!-- Matched Skills -->
+                        {% if rec.matched and rec.matched|length > 0 %}
+                            <p class="section-title">✅ Matched Skills</p>
+                            <div class="badge-container">
+                                {% for skill in rec.matched %}
+                                    <span class="badge matched">{{ skill }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <!-- Missing Skills -->
+                        {% if mode=='skills' and rec.missing is not none %}
+                            <p class="section-title">❌ Missing Skills</p>
+
+                            {% if rec.missing|length > 0 %}
+                                <div class="badge-container">
+                                    {% for skill in rec.missing %}
+                                        <span class="badge missing">{{ skill }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="perfect">🎉 Perfect Match! No missing skills.</p>
+                            {% endif %}
+                        {% endif %}
+
+                        <!-- Roadmap -->
+                        {% if mode=='skills' and rec.roadmap and rec.roadmap|length > 0 %}
+                            <div class="roadmap-box">
+                                <p class="section-title">🚀 Learning Roadmap</p>
+                                <ul>
+                                    {% for step in rec.roadmap %}
+                                        <li>{{ step }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <!-- Courses -->
+                        {% if mode=='skills' and rec.courses and rec.courses|length > 0 %}
+                            <div class="course-box">
+                                <p class="section-title">📚 Recommended Courses</p>
+                                <ul>
+                                    {% for course in rec.courses %}
+                                        <li>{{ course }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <!-- Description -->
+                        <div class="desc-box">
+                            <p>{{ rec.desc }}</p>
+                        </div>
                     </div>
-                    {% endif %}
-
-                </div>
-
                 {% endfor %}
-
             </div>
-
         </div>
+    {% endif %}
+</div>
 
-        {% endif %}
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+<script src="{{ url_for('static', filename='particles.js') }}"></script>
 
-    </div>
-
-    <!-- Particles JS -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <script src="{{ url_for('static', filename='particles.js') }}"></script>
-
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".progress-bar-fill").forEach(function (bar) {
+    const score = bar.getAttribute("data-score");
+    bar.style.width = score + "%";
+  });
+});
+</script>
 </body>
 </html>

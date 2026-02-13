@@ -20,20 +20,30 @@ body {
   color: white;
 }
 
-/* Main Box */
+/* Particle Background */
+#particles-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+/* Main Container */
 .main-box {
   width: 100%;
   max-width: 950px;
   background: rgba(30, 41, 59, 0.95);
   padding: 50px;
   border-radius: 20px;
-  box-shadow: 0px 0px 40px rgba(0, 255, 255, 0.25);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.25);
   text-align: center;
 }
 
 /* Heading */
 h1 {
-  font-size: 48px;
+  font-size: 42px;
   font-weight: 700;
   color: #facc15;
   margin-bottom: 10px;
@@ -52,23 +62,25 @@ h1 {
   align-items: center;
   gap: 15px;
   margin-bottom: 50px;
+  flex-wrap: wrap;
 }
 
-.skill-form input {
-  width: 65%;
-  padding: 16px;
+.skill-form input,
+.skill-form select {
+  padding: 14px;
   border-radius: 12px;
   border: none;
   outline: none;
-  font-size: 16px;
+  font-size: 15px;
+  min-width: 250px;
 }
 
 .skill-form button {
-  padding: 16px 25px;
+  padding: 14px 25px;
   background: #facc15;
   border: none;
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s ease;
@@ -85,124 +97,141 @@ h1 {
 }
 
 .output-section h2 {
-  font-size: 26px;
+  font-size: 24px;
   margin-bottom: 20px;
   color: #38bdf8;
 }
 
-/* Results Cards */
+/* Results Layout */
 .results {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
 /* Card */
 .card {
-  background: rgba(51, 65, 85, 0.95);
+  background: #1e293b;
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
   transition: 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 0px 25px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
 }
 
 /* Job Title */
 .card h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #f8fafc;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 
 /* Score */
-.score {
-  font-weight: bold;
-  color: #22c55e;
+.score-box {
+  margin: 15px 0;
 }
 
-/* Missing Skills */
-.missing {
-  color: #f87171;
+.score-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+.progress-bar-container {
+  background: #334155;
+  border-radius: 10px;
+  height: 10px;
+  margin-top: 8px;
+}
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+  height: 10px;
+  border-radius: 10px;
+  transition: width 0.6s ease-in-out;
+}
+
+/* Section Titles */
+.section-title {
+  margin-top: 18px;
   font-weight: 600;
+}
+
+/* Badges */
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.badge {
+  display: inline-block;
+  background: #475569;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.badge.matched {
+  background: #16a34a;
+}
+
+.badge.missing {
+  background: #dc2626;
 }
 
 .perfect {
   color: #22c55e;
   font-weight: 600;
+  margin-top: 8px;
+}
+
+/* Roadmap & Courses */
+.roadmap-box,
+.course-box {
+  background: #0f172a;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+.roadmap-box ul,
+.course-box ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.roadmap-box li,
+.course-box li {
+  margin-bottom: 6px;
+  font-size: 14px;
 }
 
 /* Description */
-.desc {
-  margin-top: 12px;
-  font-size: 15px;
+.desc-box {
+  margin-top: 15px;
+  font-size: 14px;
+  opacity: 0.85;
   line-height: 1.6;
-  color: #e2e8f0;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  h1 {
+    font-size: 32px;
+  }
+
   .skill-form {
     flex-direction: column;
   }
 
-  .skill-form input {
-    width: 100%;
-  }
-
+  .skill-form input,
+  .skill-form select,
   .skill-form button {
     width: 100%;
   }
-
-  h1 {
-    font-size: 36px;
-  }
-}
-#particles-bg {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    top: 0;
-    left: 0;
-}
-/* Missing Skills Badges */
-.badge-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.badge {
-    background: rgba(255, 70, 70, 0.15);
-    border: 1px solid rgba(255, 70, 70, 0.4);
-    color: #ff5a5a;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* Courses Box */
-.course-box {
-    margin-top: 15px;
-    padding: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 4px solid gold;
-    border-radius: 10px;
-}
-
-.course-box ul {
-    margin: 8px 0 0;
-    padding-left: 20px;
-}
-
-.course-box li {
-    font-size: 14px;
-    margin-bottom: 6px;
 }
