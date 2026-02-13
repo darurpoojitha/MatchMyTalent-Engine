@@ -30,10 +30,10 @@ MatchMyTalent Engine is a web application that helps users find suitable jobs ba
 
 ## 🖥 Screenshots
 
-![Home Page](screenshots/home_page.png)  
+![Home Page](/report/screenshots/home_page.png)  
 *Home page with skill/job search input*  
 
-![Results Page](screenshots/matched_skills.png)  
+![Results Page](report/screenshots/matched_skills.png)  
 *Results showing match score, missing skills, roadmap, and courses*  
 
 ---
@@ -57,6 +57,7 @@ MatchMyTalent Engine is a web application that helps users find suitable jobs ba
 4.Run the Flask app
   python app.py
 
-5.Open your browser and go to:
-  http://127.0.0.1:5000
+Open your browser and go to: http://127.0.0.1:5000
+
+⚠ Note: This is a local address, so it only works on your computer. To share your app publicly, deploy it using Heroku, Render, or PythonAnywhere.
   
