@@ -1,0 +1,35 @@
+# 1. Create .gitignore
+echo "__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+.env/
+.ipynb_checkpoints
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+*.sqlite3
+build/
+dist/
+*.egg-info/
+report/project_report.pdf
+report/screenshots/output*.png" > .gitignore
+
+# 2. Remove cached files that are now ignored (won't delete locally)
+git rm -r --cached __pycache__
+git rm --cached report/project_report.pdf
+git rm --cached report/screenshots/output1.png
+git rm --cached report/screenshots/output2.png
+
+# 3. Stage all changes including .gitignore
+git add .
+
+# 4. Commit everything
+git commit -m "Add .gitignore and clean repo"
+
+# 5. Push to GitHub
+git push
